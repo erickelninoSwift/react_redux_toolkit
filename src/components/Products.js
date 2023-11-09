@@ -1,9 +1,10 @@
 import React from "react";
-
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { useDispatch } from "react-redux";
+import { add } from "../store/cartSlice";
 
 const productsURL = "https://fakestoreapi.com/products";
 
@@ -20,10 +21,11 @@ export const Products = () => {
         });
       });
   }, []);
+  const addToCart = (data) => {};
 
   const card = allProduct.map((data) => {
-    console.log(data);
     const { id, category, description, image, price, rating, title } = data;
+
     return (
       <div key={id} className="col-md-3" style={{ marginBottom: "15px" }}>
         <Card
@@ -44,7 +46,9 @@ export const Products = () => {
             <Card.Text>R{price}</Card.Text>
           </Card.Body>
           <Card.Footer>
-            <Button variant="primary">Add to cart</Button>
+            <Button variant="primary" onClick={() => addToCart(data)}>
+              Add to cart
+            </Button>
           </Card.Footer>
         </Card>
       </div>
