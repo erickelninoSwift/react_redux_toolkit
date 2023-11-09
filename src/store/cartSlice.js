@@ -5,10 +5,13 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: initialStateJackpot,
   reducers: {
-    add(state = initialStateJackpot, action) {
+    add(state, action) {
       state.push(action.payload);
+    },
+    remove(state, action) {
+      return state.filter((data) => data.id !== action.payload);
     },
   },
 });
-export const { add } = cartSlice.actions;
-export default cartSlice;
+export const { add, remove } = cartSlice.actions;
+export default cartSlice.reducer;

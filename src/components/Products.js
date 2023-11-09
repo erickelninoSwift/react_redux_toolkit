@@ -9,6 +9,7 @@ import { add } from "../store/cartSlice";
 const productsURL = "https://fakestoreapi.com/products";
 
 export const Products = () => {
+  const dispatch = useDispatch();
   const [allProduct, setAllProducts] = useState([]);
   useEffect(() => {
     fetch(productsURL)
@@ -21,7 +22,10 @@ export const Products = () => {
         });
       });
   }, []);
-  const addToCart = (data) => {};
+
+  const addToCart = (data) => {
+    dispatch(add(data));
+  };
 
   const card = allProduct.map((data) => {
     const { id, category, description, image, price, rating, title } = data;

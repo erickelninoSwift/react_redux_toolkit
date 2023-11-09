@@ -3,7 +3,11 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 export const NavBar = () => {
+  const allproducts = useSelector((state) => {
+    return state.cart;
+  });
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -15,7 +19,7 @@ export const NavBar = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link to="/" as={Link}>
+            <Nav.Link to="/cart" as={Link}>
               products
             </Nav.Link>
           </Nav>
@@ -24,7 +28,7 @@ export const NavBar = () => {
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
               <Nav.Link to="/" as={Link}>
-                My bag {0}
+                My bag {allproducts.length}
               </Nav.Link>
             </Navbar.Text>
           </Navbar.Collapse>
