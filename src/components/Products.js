@@ -5,29 +5,22 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useDispatch } from "react-redux";
 import { add } from "../store/cartSlice";
-
-const productsURL = "https://fakestoreapi.com/products";
+import { getProducts } from "../store/ProductSlice";
+import { useSelector } from "react-redux";
 
 export const Products = () => {
   const dispatch = useDispatch();
-  const [allProduct, setAllProducts] = useState([]);
+  const { data: myProducts } = useSelector((state) => state.products);
+
   useEffect(() => {
-    fetch(productsURL)
-      .then((data) => {
-        return data.json();
-      })
-      .then((alldata) => {
-        setAllProducts(() => {
-          return alldata;
-        });
-      });
+    dispatch(getProducts());
   }, []);
 
   const addToCart = (data) => {
     dispatch(add(data));
   };
 
-  const card = allProduct.map((data) => {
+  const card = myProducts.map((data) => {
     const { id, category, description, image, price, rating, title } = data;
 
     return (

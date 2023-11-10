@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialStateJackpot = [];
+const initialStateJackpot = {
+  data: [],
+  error: "",
+  isLoading: false,
+};
 const cartSlice = createSlice({
   name: "cart",
   initialState: initialStateJackpot,
   reducers: {
     add(state, action) {
-      state.push(action.payload);
+      state.data.push(action.payload);
     },
     remove(state, action) {
-      return state.filter((data) => data.id !== action.payload);
+      return state.data.filter((data) => data.id !== action.payload);
     },
   },
 });
